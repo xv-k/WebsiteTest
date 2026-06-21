@@ -2,7 +2,7 @@
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color-scheme: light;
   color: #111827;
-  background: #f8fafc;
+  background: #f3f4f6;
 }
 
 * {
@@ -12,72 +12,182 @@
 body {
   margin: 0;
   min-height: 100vh;
+  background: linear-gradient(180deg, #eff6ff 0%, #f8fafc 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   padding: 2rem;
-  background: linear-gradient(180deg, #ffffff 0%, #eef2ff 100%);
 }
 
-header,
-footer {
-  text-align: center;
-  max-width: 720px;
+.page {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
   width: 100%;
+  max-width: 1160px;
 }
 
-header h1 {
-  margin: 0 0 0.5rem;
-  font-size: clamp(2rem, 4vw, 3rem);
+.sidebar {
+  width: min(320px, 100%);
+  display: grid;
+  gap: 1rem;
 }
 
-header p,
-footer p {
-  margin: 0;
-  color: #4b5563;
-}
-
-main {
-  width: 100%;
-  max-width: 720px;
-  margin-top: 2rem;
-}
-
-.card {
+.sidebar-card,
+.garden {
   background: white;
   border: 1px solid #e5e7eb;
   border-radius: 1rem;
-  padding: 2rem;
-  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+  padding: 1.5rem;
+  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
 }
 
-.card h2 {
-  margin-top: 0;
+.sidebar-card h2,
+.sidebar-card h3,
+.garden-header h1 {
+  margin: 0 0 0.75rem;
 }
 
-button {
-  display: inline-flex;
+.sidebar-card p,
+.garden-header p,
+footer p {
+  margin: 0;
+  color: #475569;
+  line-height: 1.6;
+}
+
+.seed-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.seed-item {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 1rem;
-  padding: 0.85rem 1.4rem;
-  border: none;
-  border-radius: 999px;
-  background: #4f46e5;
-  color: white;
-  font-size: 1rem;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.9rem;
+  background: #f8fafc;
   cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease;
+  transition: border-color 0.2s ease, background 0.2s ease;
 }
 
-button:hover {
-  transform: translateY(-1px);
-  background: #4338ca;
+.seed-item:hover,
+.seed-item.selected {
+  background: #eef2ff;
+  border-color: #c7d2fe;
 }
 
-#message {
-  margin-top: 1rem;
-  color: #2563eb;
+.seed-item .label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.seed-item strong {
+  font-size: 1rem;
+}
+
+.seed-item span {
+  color: #475569;
+  font-size: 0.95rem;
+}
+
+.garden {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.garden-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.plot {
+  aspect-ratio: 1 / 1;
+  border-radius: 1rem;
+  border: 1px solid #d4d4d8;
+  background: radial-gradient(circle at 40% 30%, #8b5c42 0%, #6b4226 35%, #57331e 100%);
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem;
+  font-size: 1.35rem;
+  color: #f8fafc;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.plot:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+}
+
+.plot.planted {
+  background: linear-gradient(180deg, #5c451c 0%, #3f2a14 100%);
+  color: #dbeafe;
+}
+
+.plot .plot-icon {
+  font-size: 1.7rem;
+}
+
+.plot .progress-bar {
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.25);
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+.plot .progress-fill {
+  width: 0%;
+  height: 100%;
+  background: #34d399;
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.plot.ready {
+  border-color: #10b981;
+}
+
+.plot.ready .plot-icon {
+  font-size: 1.7rem;
+}
+
+footer {
+  margin-top: 1.5rem;
+  text-align: center;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .garden {
+    order: 2;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
 }
